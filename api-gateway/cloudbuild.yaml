@@ -7,6 +7,12 @@ steps:
       - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/api-gateway:$COMMIT_SHA
       - .
 
+  # 🔴 ESTE PASO FALTABA
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/api-gateway:$COMMIT_SHA
+
   - name: gcr.io/cloud-builders/gcloud
     args:
       - run
