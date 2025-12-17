@@ -7,6 +7,12 @@ steps:
       - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA
       - .
 
+  # 🔴 PASO CRÍTICO: push a Artifact Registry
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA
+
   - name: gcr.io/cloud-builders/gcloud
     args:
       - run
@@ -20,3 +26,6 @@ steps:
 
 images:
   - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA
+
+options:
+  logging: CLOUD_LOGGING_ONLY
