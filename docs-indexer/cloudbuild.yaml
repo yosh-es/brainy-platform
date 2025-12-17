@@ -1,0 +1,22 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    dir: docs-indexer
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/docs-indexer:$COMMIT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - run
+      - deploy
+      - brainy-docs-indexer
+      - --image=us-central1-docker.pkg.dev/$PROJECT_ID/brainy/docs-indexer:$COMMIT_SHA
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --set-env-vars=SERVICE_NAME=docs-indexer,DEPLOY_COMMIT=$COMMIT_SHA
+
+images:
+  - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/docs-indexer:$COMMIT_SHA

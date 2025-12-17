@@ -1,0 +1,22 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    dir: api-gateway
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/api-gateway:$COMMIT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - run
+      - deploy
+      - brainy-api-gateway
+      - --image=us-central1-docker.pkg.dev/$PROJECT_ID/brainy/api-gateway:$COMMIT_SHA
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --set-env-vars=SERVICE_NAME=api-gateway,DEPLOY_COMMIT=$COMMIT_SHA
+
+images:
+  - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/api-gateway:$COMMIT_SHA

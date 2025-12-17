@@ -1,0 +1,22 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    dir: brainyCore
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - run
+      - deploy
+      - brainy-core
+      - --image=us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --set-env-vars=SERVICE_NAME=brainy-core,DEPLOY_COMMIT=$COMMIT_SHA
+
+images:
+  - us-central1-docker.pkg.dev/$PROJECT_ID/brainy/brainy-core:$COMMIT_SHA

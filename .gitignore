@@ -1,0 +1,84 @@
+# =============================
+
+# Node.js / Fastify (npm)
+
+# =============================
+
+# Dependencias (monorepo)
+
+**/node_modules/
+
+# Logs
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage / tests
+
+coverage/
+.nyc_output/
+
+# Build / dist
+
+build/
+dist/
+
+# Cache
+
+.cache/
+.eslintcache
+
+# Env files
+
+.env
+.env.*
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# IDEs / Editors
+
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# TypeScript (si aplica)
+
+*.tsbuildinfo
+
+# Fastify / tooling
+
+.fastify/
+
+# Docker (si usas Docker)
+
+.dockerignore
+
+# Optional npm cache
+
+.npm/
+
+# Local configs
+
+config/local.*
+
+# =============================
+
+# End
+
+# =============================
